@@ -1,6 +1,17 @@
+<script>
+import Button from '../components/ui/button/Button.vue'
+
+export default {
+  name: 'Signup',
+  components: {
+    Button
+  }
+}
+</script>
+
 <template>
   <div
-    class="flex flex-col items-center gap-4 py-10 md:gap-8 md:grid md:items-stretch md:py-16 md:gap-0 lg:grid-cols-2"
+    class="h-hero flex flex-col items-center gap-4 md:gap-8 md:grid md:items-stretch md:gap-0 lg:grid-cols-2"
   >
     <div class="flex items-center justify-center p-6 lg:p-10">
       <div class="mx-auto w-[350px] space-y-6">
@@ -11,7 +22,7 @@
             <a class="underline" href="#"> Sign in </a>
           </p>
         </div>
-        <div class="space-y-4">
+        <form class="space-y-4 border-blackborder">
           <div class="space-y-2">
             <label
               class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -20,7 +31,8 @@
             ><input
               class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
               id="username"
-              required=""
+              required="true"
+              placeholder="Alma16"
             />
           </div>
           <div class="space-y-2">
@@ -31,8 +43,8 @@
             ><input
               class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
               id="email"
-              placeholder="m@example.com"
-              required=""
+              placeholder="alma@ironhack.com"
+              required="true"
               type="email"
             />
           </div>
@@ -44,7 +56,7 @@
             ><input
               class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
               id="password"
-              required=""
+              required="true"
               type="password"
             />
           </div>
@@ -56,41 +68,27 @@
             ><input
               class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
               id="confirm-password"
-              required=""
+              required="true"
               type="password"
             />
           </div>
-          <button
-            class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full"
-            type="submit"
+
+          <Button class="h-10 px-4 py-2 w-full rounded-full" type="submit" variant="destructive"
+            >Sign Up</Button
           >
-            Sign up
-          </button>
-        </div>
+        </form>
       </div>
     </div>
-    <div class="items-center justify-center p-6 lg:flex lg:bg-gray-100 lg:p-10 dark:lg:bg-gray-800">
+    <div
+      class="items-center justify-center text-white p-6 bg-center bg-no-repeat bg-cover lg:flex md:bg-hero1 lg:bg-hero1 lg:p-10 dark:lg:bg-gray-800 sm:hidden"
+    >
       <div class="mx-auto grid max-w-[350px] gap-3 lg:max-w-[500px]">
-        <blockquote
-          class="text-lg font-semibold leading-snug lg:text-xl lg:leading-normal xl:text-2xl"
-        >
-          Here to view the world
-        </blockquote>
-        <div>
-          <div class="font-semibold">Ah ouais</div>
-          <div class="text-sm text-gray-500 dark:text-gray-400">Michaël R</div>
-        </div>
+        <h1 class="text-2xl font-semibold leading-snug lg:text-4xl lg:leading-normal xl:text-4xl">
+          Text.
+        </h1>
       </div>
     </div>
   </div>
 </template>
-
-<script>
-import { Button } from '@/components/ui/button'
-
-export default {
-
-}
-</script>
 
 <style scoped></style>

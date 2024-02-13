@@ -1,16 +1,13 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
+import Navbar  from './components/Navbar.vue';
+
 </script>
 
 <template>
   <header>
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/signup">Signup</RouterLink>
-        <RouterLink to="/login">Login</RouterLink>
-      </nav>
+    <Navbar></Navbar>
   </header>
-
   <RouterView />
 </template>
 
@@ -18,7 +15,6 @@ import { RouterLink, RouterView } from 'vue-router'
 header {
   line-height: 1.5;
   max-height: 100vh;
-  border: 1px solid red;
 }
 
 .logo {
