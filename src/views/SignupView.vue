@@ -1,10 +1,46 @@
 <script>
 import Button from '../components/ui/button/Button.vue'
+import backendApi from '@/api/backendHandler'
 
 export default {
   name: 'Signup',
   components: {
     Button
+  },
+  data() {
+    return {
+      username: '',
+      password: '',
+      email: '',
+      confirmPassword: ''
+    }
+  },
+
+  methods: {
+    async submitSignup() {
+      if (this.confirmPassword === this.password) {
+        let userData = {
+          username: this.username,
+          email: this.email,
+          password: this.password
+        }
+        try {
+          const response = await backendApi.post('/auth/signup', userData)
+          console.log(response.data)
+        } catch (error) {
+          throw error
+        }
+      }
+    }
+  },
+  computed: {
+    isSignupDisabled() {
+      return (
+        this.password === '' ||
+        this.confirmPassword === '' ||
+        this.password !== this.confirmPassword
+      )
+    }
   }
 }
 </script>
@@ -22,7 +58,7 @@ export default {
             <a class="underline" href="#"> Sign in </a>
           </p>
         </div>
-        <form class="space-y-4 border-blackborder">
+        <form class="space-y-4 border-blackborder" @submit.prevent="submitSignup">
           <div class="space-y-2">
             <label
               class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -31,6 +67,7 @@ export default {
             ><input
               class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
               id="username"
+              v-model="username"
               required="true"
               placeholder="Alma16"
             />
@@ -43,6 +80,7 @@ export default {
             ><input
               class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
               id="email"
+              v-model="email"
               placeholder="alma@ironhack.com"
               required="true"
               type="email"
@@ -56,6 +94,7 @@ export default {
             ><input
               class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
               id="password"
+              v-model="password"
               required="true"
               type="password"
             />
@@ -68,12 +107,23 @@ export default {
             ><input
               class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
               id="confirm-password"
+              v-model="confirmPassword"
               required="true"
               type="password"
             />
+            <p
+              v-if="password !== '' && confirmPassword !== '' && password !== confirmPassword"
+              class="text-red-500 text-sm"
+            >
+              Passwords do not match.
+            </p>
           </div>
 
-          <Button class="h-10 px-4 py-2 w-full rounded-full" type="submit" variant="destructive"
+          <Button
+            class="h-10 px-4 py-2 w-full rounded-full"
+            type="submit"
+            variant="destructive"
+            :disabled="isSignupDisabled"
             >Sign Up</Button
           >
         </form>

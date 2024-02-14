@@ -1,14 +1,41 @@
 <script>
 import Button from '../components/ui/button/Button.vue'
+import backendApi from '@/api/backendHandler'
+
 export default {
   name: 'Login',
   components: {
-    Button, 
+    Button
+  },
+  data() {
+    return {
+      username: '',
+      password: ''
+    }
+  },
+  methods: {
+    async submitLogin() {
+      let userData = {
+        username: this.username,
+        password: this.password
+      }
+      try {
+        const response = await backendApi.post('auth/login', userData)
+        // console.log(response.data)
+        localStorage.setItem("token", response.data.authToken)
+
+      } catch (error) {
+        throw error
+      }
+    }
+  },
+  computed: {
+    isLoginDisabled() {
+      return this.password === '' || this.username === ''
+    }
   }
 }
 </script>
-
-
 
 <template>
   <div
@@ -23,7 +50,7 @@ export default {
             <a class="underline" href="#"> sign up </a>
           </p>
         </div>
-        <form class="space-y-4">
+        <form class="space-y-4" @submit.prevent="submitLogin">
           <div class="space-y-2">
             <label
               class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -32,8 +59,9 @@ export default {
             ><input
               class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
               id="username"
+              v-model="username"
               placeholder="Alma16"
-              required=""
+              required="true"
               type="text"
             />
           </div>
@@ -45,11 +73,16 @@ export default {
             ><input
               class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
               id="password"
-              required=""
+              v-model="password"
+              required="true"
               type="password"
             />
           </div>
-          <Button class="h-10 px-4 py-2 w-full rounded-full" type="submit" variant="destructive"
+          <Button
+            class="h-10 px-4 py-2 w-full rounded-full"
+            type="submit"
+            variant="destructive"
+            :disabled="isLoginDisabled"
             >Log In</Button
           >
         </form>
@@ -66,6 +99,5 @@ export default {
     </div>
   </div>
 </template>
-
 
 <style scoped></style>

@@ -45,7 +45,7 @@ export default {
   name: 'Navbar',
   data() {
     return {
-      logo: '/public/VueRedLogo.png'
+      logo: '/VueRedLogo.png'
     }
   }
 }

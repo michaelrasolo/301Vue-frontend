@@ -19,11 +19,8 @@ module.exports = {
     },
     extend: {
       backgroundImage: {
-        'hero1': "url('./public/hero1.jpg')",
-        'hero2': "url('./public/hero2.jpg')",
-        'hero3': "url('./public/hero3.jpg')",
-        'hero4': "url('./public/hero4.jpg')",
-        'hero6': "url('./public/hero6.jpg')",
+        'hero1': "url('hero1.jpg')",
+        'hero6': "url('hero6.jpg')",
       },
       height: { hero: 'calc(100vh - 3.5rem)' },
       colors: {
