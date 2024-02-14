@@ -1,6 +1,7 @@
 <script setup>
 import { RouterView } from 'vue-router'
 import Navbar  from './components/Navbar.vue';
+import VideoGrid from './components/VideoGrid.vue'
 
 </script>
 

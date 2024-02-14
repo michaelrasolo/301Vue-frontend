@@ -1,6 +1,7 @@
 <script>
 import Button from '../components/ui/button/Button.vue'
 import backendApi from '@/api/backendHandler'
+import { RouterLink } from 'vue-router'
 
 export default {
   name: 'Login',
@@ -47,7 +48,7 @@ export default {
           <h1 class="text-3xl font-bold">Login</h1>
           <p class="text-gray-500 dark:text-gray-400">
             To create an account,
-            <a class="underline" href="#"> sign up </a>
+            <RouterLink class="underline" to="/signup">Sign Up </RouterLink>
           </p>
         </div>
         <form class="space-y-4" @submit.prevent="submitLogin">
