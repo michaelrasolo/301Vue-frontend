@@ -13,7 +13,7 @@ const findVideos = async (query) => {
           q: query,
           type: "video",
           part: "snippet",
-          maxResults: 20
+          maxResults: 30
         },
       })
       return response.data.items

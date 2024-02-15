@@ -24,6 +24,7 @@ export default {
         const response = await backendApi.post('auth/login', userData)
         // console.log(response.data)
         localStorage.setItem("token", response.data.authToken)
+        console.log(localStorage.getItem('token'))
 
       } catch (error) {
         throw error
@@ -40,7 +41,7 @@ export default {
 
 <template>
   <div
-    class="h-hero flex flex-col items-center gap-4 md:gap-8 md:grid md:items-stretch md:gap-0 lg:grid-cols-2"
+    class="h-screen flex flex-col items-center gap-4 md:gap-8 md:grid md:items-stretch md:gap-0 lg:grid-cols-2"
   >
     <div class="flex items-center justify-center p-6 lg:p-10">
       <div class="mx-auto w-[350px] space-y-6">
@@ -92,11 +93,11 @@ export default {
     <div
       class="items-center justify-center text-white p-6 bg-center bg-no-repeat bg-cover lg:flex lg:bg-hero6 md:bg-hero6 lg:p-10 dark:lg:bg-gray-800 sm:hidden"
     >
-      <div class="mx-auto grid max-w-[350px] gap-3 lg:max-w-[500px]">
+      <!-- <div class="mx-auto grid max-w-[350px] gap-3 lg:max-w-[500px]">
         <h1 class="text-2xl font-semibold leading-snug lg:text-4xl lg:leading-normal xl:text-4xl">
           Text.
         </h1>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
