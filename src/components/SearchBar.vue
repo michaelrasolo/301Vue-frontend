@@ -40,11 +40,11 @@ export default {
   name: 'SearchBar',
   data() {
     return {
-      query: 'VueJS'
+      query: ''
     }
   },
   methods: {
-    setQuery() {
+    setQuery(event) {
       if (event.key === 'Enter') {
         this.$emit('query-updated', this.query);
       }

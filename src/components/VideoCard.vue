@@ -16,35 +16,49 @@
       </p>
 
       <Button
-        @click="addToFavs"
+        v-if="!isFavorite"
+        @click="addToFavs(video)"
         variant="destructive"
         class="absolute rounded-full absolute bottom-4 right-4 text-lg"
-        >+</Button
-      >
+        >+
+      </Button>
+      <Button
+        v-else
+        @click="removeFav(video.videoYtId)"
+        variant="secondary"
+        class="absolute rounded-full absolute bottom-4 right-4 text-lg"
+        >X
+      </Button>
     </div>
   </div>
 </template>
 
 <script>
 import Button from '../components/ui/button/Button.vue'
-import addToFavorites from '../api/addToFavorites'
+// import { addToFavorites } from '../api/favsHandler.js'
+
 export default {
   name: 'VideoCard',
   props: {
-    video: Object
+    video: Object,
+    formatedFavorites: Array
   },
   components: {
     Button
   },
   methods: {
-    async addToFavs() {
-    
-      try {
-        const savedFav = await addToFavorites(this.video)
-        console.log('Video added:', savedFav)
-      } catch (error) {
-        console.error('Error adding video to favorites:', error)
-      }
+    async addToFavs(videoData) {
+      this.$emit('add-fav',videoData)
+
+    },
+    removeFav(videoYtId){
+this.$emit('remove-fav',videoYtId)
+    }
+
+  },
+  computed: {
+    isFavorite() {
+      return this.formatedFavorites.some((favorite) => favorite.videoYtId === this.video.videoYtId)
     }
   }
 }

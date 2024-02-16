@@ -1,7 +1,7 @@
 <template>
   <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-4 md:p-6">
-    <RouterView v-for="video in formatedVideos" :key="video.videoYtId">
-      <VideoCard :video="video"/>
+    <RouterView v-for="video in formatedDisplayVideos" :key="video.videoYtId">
+      <VideoCard :video="video" :formatedFavorites="formatedFavorites" @remove-fav="$emit('remove-fav',video.videoYtId)" @add-fav="$emit('add-fav',video)"/>
     </RouterView>
   </section>
 </template>
@@ -16,7 +16,10 @@ export default {
     VideoCard,
   },
   props: {
-    formatedVideos: Array
-  }
+    formatedDisplayVideos: Array,
+    formatedFavorites: Array,
+
+  },
+  emits: ['remove-fav', "add-fav"]
 }
 </script>
